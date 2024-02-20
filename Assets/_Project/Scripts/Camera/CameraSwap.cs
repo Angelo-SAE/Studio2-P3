@@ -18,11 +18,11 @@ public class CameraSwap : MonoBehaviour
     {
       if(Mode.mode3D)
       {
-        camera3D.SetActive(true);
-        camera2D.SetActive(false);
-      } else {
         camera2D.SetActive(true);
         camera3D.SetActive(false);
+      } else {
+        camera3D.SetActive(true);
+        camera2D.SetActive(false);
       }
     }
 }
