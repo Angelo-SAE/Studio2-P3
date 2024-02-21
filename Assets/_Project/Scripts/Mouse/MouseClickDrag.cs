@@ -6,9 +6,9 @@ public class MouseClickDrag : MonoBehaviour
 {
 
     private GameObject draggableObject;
-    private float dMaxUp, dMaxDown, dMaxRight, dMaxLeft;
+    private float dMaxUp, dMaxDown, dMaxRight, dMaxLeft, mouseX, mouseY;
     [SerializeField] private Camera camera2D;
-    private Vector2 mousePosition;
+    private Vector2 mousePosition, mouseClickPosition;
 
     void Update()
     {
@@ -33,7 +33,7 @@ public class MouseClickDrag : MonoBehaviour
         if(targetObject != null)
         {
           draggableObject = targetObject.transform.gameObject;
-
+          mouseClickPosition = mousePosition;
           Draggable dragScript = draggableObject.GetComponent<Draggable>();
           dMaxUp = dragScript.maxUp;
           dMaxDown = dragScript.maxDown;
@@ -52,9 +52,9 @@ public class MouseClickDrag : MonoBehaviour
 
     private void MoveDraggableObject()
     {
-      if(draggableObject.transform.position.y <= dMaxUp && draggableObject.transform.position.y >= dMaxDown && draggableObject.transform.position.x <= dMaxRight && draggableObject.transform.position.x >= dMaxLeft)
-      {
-        draggableObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, draggableObject.transform.position.z);
-      }
+      mouseX = Mathf.Clamp(mousePosition.x, dMaxLeft, dMaxRight);
+      mouseY = Mathf.Clamp(mousePosition.y, dMaxDown, dMaxUp);
+
+      draggableObject.transform.position = new Vector3(mouseX, mouseY, draggableObject.transform.position.z);
     }
 }
