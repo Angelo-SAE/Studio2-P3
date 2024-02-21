@@ -16,11 +16,11 @@ public class MouseClickDrag : MonoBehaviour
         if(!Mode.mode3D)
         {
           GetDraggableObject();
-        }
 
-        if(draggableObject != null)
-        {
-          MoveDraggableObject();
+          if(draggableObject != null)
+          {
+            MoveDraggableObject();
+          }
         }
     }
 
