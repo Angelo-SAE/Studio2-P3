@@ -26,11 +26,11 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal") * moveSpeed;
-        float moveVertical = Input.GetAxis("Vertical") * moveSpeed;
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        float moveForward = Input.GetAxis("Horizontal") * moveSpeed;
+        float moveSideways = Input.GetAxis("Vertical") * moveSpeed;
+        Vector3 movement = new Vector3(moveSideways, 0.0f, moveForward);
 
-        rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
+        rb.velocity = new Vector3(movement.x, rb.velocity.y, -movement.z);
     }
 
     void Jump()
