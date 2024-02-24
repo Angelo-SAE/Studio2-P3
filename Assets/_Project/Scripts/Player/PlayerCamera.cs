@@ -13,15 +13,9 @@ public class PlayerCamera : MonoBehaviour
     private float Y_ANGLE_MIN = -10f;
     private float Y_ANGLE_MAX = 60f;
 
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     private void Update()
     {
-        
+
         currentX += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         currentY -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
         currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);

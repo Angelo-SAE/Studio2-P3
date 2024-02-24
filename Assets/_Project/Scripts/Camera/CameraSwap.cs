@@ -20,9 +20,13 @@ public class CameraSwap : MonoBehaviour
       {
         camera2D.SetActive(true);
         camera3D.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
       } else {
         camera3D.SetActive(true);
         camera2D.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
       }
     }
 }
