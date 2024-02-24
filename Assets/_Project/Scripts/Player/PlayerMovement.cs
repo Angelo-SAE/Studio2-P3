@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private bool isGrounded;
+    public Camera cam;
 
     void Start()
     {
@@ -26,11 +27,25 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        float moveForward = Input.GetAxis("Horizontal") * moveSpeed;
-        float moveSideways = Input.GetAxis("Vertical") * moveSpeed;
-        Vector3 movement = new Vector3(moveSideways, 0.0f, moveForward);
+        {
+            
+            Vector3 cameraForward = cam.transform.forward;
+            Vector3 cameraRight = cam.transform.right;
+            cameraForward.y = 0;
+            cameraRight.y = 0;
+            cameraForward.Normalize();
+            cameraRight.Normalize();
 
-        rb.velocity = new Vector3(movement.x, rb.velocity.y, -movement.z);
+            
+            float moveForward = Input.GetAxis("Vertical");
+            float moveSideways = Input.GetAxis("Horizontal");
+
+            
+            Vector3 movement = (cameraForward * moveForward + cameraRight * moveSideways) * moveSpeed;
+
+            
+            rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
+        }
     }
 
     void Jump()

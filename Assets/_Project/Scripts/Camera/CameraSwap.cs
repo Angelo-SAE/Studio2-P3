@@ -8,7 +8,7 @@ public class CameraSwap : MonoBehaviour
 
     void Update()
     {
-      if(Input.GetKeyDown(KeyCode.Space))
+      if(Input.GetKeyDown(KeyCode.R))
       {
         CameraState();
       }
