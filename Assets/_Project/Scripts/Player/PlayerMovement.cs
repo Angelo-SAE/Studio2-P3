@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
+    [SerializeField] private float RotationSpeed;
 
     private Rigidbody rb;
     private bool isGrounded;
@@ -18,10 +19,16 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MovePlayer();
+        RotatePlayer();
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             Jump();
         }
+    }
+
+    private void RotatePlayer()
+    {
+      transform.Rotate((Input.GetAxis("Mouse X") * RotationSpeed * Time.deltaTime), (Input.GetAxis("Mouse Y") * RotationSpeed * Time.deltaTime), 0, Space.World);
     }
 
     void MovePlayer()
@@ -38,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
     }
 
-    
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -47,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    
+
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))

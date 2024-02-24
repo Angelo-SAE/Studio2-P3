@@ -18,7 +18,10 @@ public class PlayerStick : MonoBehaviour
     private void DetectFloor()
     {
       Physics.Raycast(transform.position, -Vector3.up, out hit, detectionRange, 1 << 6);
-      groundObject = hit.transform.gameObject;
+      if(hit.transform != null)
+      {
+        groundObject = hit.transform.gameObject;
+      }
     }
 
     private void MakeParent()
