@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
-    [SerializeField] private float RotationSpeed;
+    [SerializeField] private float jumpFallForce;
 
     private Rigidbody rb;
     private bool isGrounded;
@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
       if(Mode.mode3D)
       {
         MovePlayer();
-        RotatePlayer();
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             Jump();
@@ -30,32 +29,29 @@ public class PlayerMovement : MonoBehaviour
       }
     }
 
-    private void RotatePlayer()
-    {
-      transform.Rotate((Input.GetAxis("Mouse X") * RotationSpeed * Time.deltaTime), (Input.GetAxis("Mouse Y") * RotationSpeed * Time.deltaTime), 0, Space.World);
-    }
-
     void MovePlayer()
     {
-        {
-
-            Vector3 cameraForward = cam.transform.forward;
-            Vector3 cameraRight = cam.transform.right;
-            cameraForward.y = 0;
-            cameraRight.y = 0;
-            cameraForward.Normalize();
-            cameraRight.Normalize();
+      Vector3 cameraForward = cam.transform.forward;
+      Vector3 cameraRight = cam.transform.right;
+      cameraForward.y = 0;
+      cameraRight.y = 0;
+      cameraForward.Normalize();
+      cameraRight.Normalize();
 
 
-            float moveForward = Input.GetAxis("Vertical");
-            float moveSideways = Input.GetAxis("Horizontal");
+      float moveForward = Input.GetAxis("Vertical");
+      float moveSideways = Input.GetAxis("Horizontal");
 
 
-            Vector3 movement = (cameraForward * moveForward + cameraRight * moveSideways) * moveSpeed;
+      Vector3 movement = (cameraForward * moveForward + cameraRight * moveSideways) * moveSpeed;
 
 
-            rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
-        }
+      rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
+
+      if(rb.velocity.y < 0)
+      {
+        rb.AddForce(-Vector3.up * jumpFallForce);
+      }
     }
 
     void Jump()

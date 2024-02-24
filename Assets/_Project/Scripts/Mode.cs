@@ -7,6 +7,13 @@ public class Mode : MonoBehaviour
 
     public static bool mode3D;
 
+    void Awake()
+    {
+      Cursor.lockState = CursorLockMode.Locked;
+      Cursor.visible = false;
+      mode3D = true;
+    }
+
     void Update()
     {
       if(Input.GetKeyDown(KeyCode.R))
