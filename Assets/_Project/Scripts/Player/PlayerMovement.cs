@@ -19,12 +19,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+      if(Mode.mode3D)
+      {
         MovePlayer();
         RotatePlayer();
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             Jump();
         }
+      }
     }
 
     private void RotatePlayer()
@@ -35,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayer()
     {
         {
-            
+
             Vector3 cameraForward = cam.transform.forward;
             Vector3 cameraRight = cam.transform.right;
             cameraForward.y = 0;
@@ -43,14 +46,14 @@ public class PlayerMovement : MonoBehaviour
             cameraForward.Normalize();
             cameraRight.Normalize();
 
-            
+
             float moveForward = Input.GetAxis("Vertical");
             float moveSideways = Input.GetAxis("Horizontal");
 
-            
+
             Vector3 movement = (cameraForward * moveForward + cameraRight * moveSideways) * moveSpeed;
 
-            
+
             rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
         }
     }
