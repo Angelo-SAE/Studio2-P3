@@ -32,13 +32,16 @@ public class MouseClickDrag : MonoBehaviour
 
         if(targetObject != null)
         {
-          draggableObject = targetObject.transform.gameObject;
-          mouseClickPosition = mousePosition;
-          Draggable dragScript = draggableObject.GetComponent<Draggable>();
-          dMaxUp = dragScript.maxUp;
-          dMaxDown = dragScript.maxDown;
-          dMaxRight = dragScript.maxRight;
-          dMaxLeft = dragScript.maxLeft;
+          if(targetObject.tag == "Draggable")
+          {
+            draggableObject = targetObject.transform.gameObject;
+            mouseClickPosition = mousePosition;
+            Draggable dragScript = draggableObject.GetComponent<Draggable>();
+            dMaxUp = dragScript.maxUp;
+            dMaxDown = dragScript.maxDown;
+            dMaxRight = dragScript.maxRight;
+            dMaxLeft = dragScript.maxLeft;
+          }
         }
       }
       if(Input.GetMouseButtonUp(0))
