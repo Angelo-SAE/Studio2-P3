@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d8def286acc4b743851ee74b12d58e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 1
+  detectionRange: 10
 --- !u!114 &7804970630087325083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe61362096f369a49a57664c7345ac88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 5
   jumpForce: 8
-  jumpFallForce: 6
+  jumpFallForce: 9
   cam: {fileID: 0}
+  isForcedDown: 0
