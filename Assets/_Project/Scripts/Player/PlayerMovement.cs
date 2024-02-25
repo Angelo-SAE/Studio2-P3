@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded;
     public Camera cam;
+    public bool isForcedDown;
 
     void Start()
     {
@@ -21,12 +22,21 @@ public class PlayerMovement : MonoBehaviour
     {
       if(Mode.mode3D)
       {
-        MovePlayer();
+        
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             Jump();
         }
       }
+    }
+
+    void FixedUpdate()
+    {
+        if (Mode.mode3D)
+        {
+            MovePlayer();
+            
+        }
     }
 
     void MovePlayer()
@@ -48,10 +58,16 @@ public class PlayerMovement : MonoBehaviour
 
       rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
 
-      if(rb.velocity.y < 0)
+      if(rb.velocity.y < -0.1f)
       {
         rb.AddForce(-Vector3.up * jumpFallForce);
+            isForcedDown = true;
       }
+        else
+        {
+            isForcedDown = false;
+            
+        }
     }
 
     void Jump()
