@@ -7,6 +7,12 @@ public class PlatformBob : MonoBehaviour
     public float bobbingSpeed;
     public float bobbingHeight;
 
+    public float bobbingSpeedHorizontal;
+    public float bobbingHeightHorizontal;
+
+    public bool isBobbing = true;
+    public bool isHBobbing = true;
+
     private Vector3 startPosition;
 
     void Start()
@@ -16,10 +22,30 @@ public class PlatformBob : MonoBehaviour
 
     void Update()
     {
-        
-        float newY = Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight + startPosition.y;
+        if (isBobbing && isHBobbing) 
+        {
+            float newY = Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight + startPosition.y;
+            float newZ = Mathf.Sin(Time.time * bobbingSpeedHorizontal) * bobbingHeightHorizontal + startPosition.z;
 
+
+            transform.position = new Vector3(startPosition.x, newY, newZ);
+
+        }
         
-        transform.position = new Vector3(startPosition.x, newY, startPosition.z);
+        if (isBobbing && !isHBobbing)
+        {
+            float newY = Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight + startPosition.y;
+
+
+            transform.position = new Vector3(startPosition.x, newY, startPosition.z);
+        }
+
+        else if (isHBobbing && !isBobbing)
+        {
+            float newZ = Mathf.Sin(Time.time * bobbingSpeedHorizontal) * bobbingHeightHorizontal + startPosition.z;
+
+
+            transform.position = new Vector3(startPosition.x, startPosition.y, newZ);
+        }
     }
 }
