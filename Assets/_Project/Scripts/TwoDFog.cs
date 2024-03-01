@@ -39,6 +39,7 @@ public class TwoDFog : MonoBehaviour
       {
         fog.SetActive(false);
         fogAlive = false;
+        Destroy(gameObject);
       }
     }
 }
